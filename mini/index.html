@@ -1,0 +1,862 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <title>Írott Kör Mini</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/c14e7dc8c5.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="pic/logo.ico" />
+  <link rel="icon" type="image/png" href="pic/favicon.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="pic/favicon.png" sizes="16x16">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://irottkor.hu/common.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16189096-10"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-16189096-10');
+  </script>
+  </head>
+</head>
+<body onload="pageLoad();">
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background: #333;">
+  <a class="navbar-brand" href="#"><img src="pic/favicon.png" style="width: 30px; height: 30px;"> Írott kör Mini</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#home">Térkép</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#itiner">Itiner</a>
+      </li>
+      <li class="nav-item hide-mobile">
+        <a class="nav-link" href="#landmarks">Látványoságok</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="#news">Tudnivalók</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="start()">Indulás</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="results()">Eredmények</a>
+      </li>
+	  <li class="nav-item" id="atveteliPont" style="display:none;"> 
+        <a class="nav-link" onclick="pickupPoint()">Átvételi Pont</a>
+      </li>
+	  </ul>
+	  <ul class="navbar-nav hide-desktop">
+		  <li class="nav-item" style="display:none;" name="mobileMail">
+			<span class="nav-link">Kifizetett érmek: <span id="medalMobile"></span></span>
+		  </li>	
+		  <li class="nav-item" style="display:none;" name="mobileMail">
+			<a class="nav-link" onclick="myResults()">Eredményeim</a>
+		  </li>	
+		  <li class="nav-item" style="display:none;" name="mobileMail">
+			<a class="nav-link" onclick="openSettings()">Adat módosítás</a>
+			</li>
+		   <li class="nav-item" style="display:none;" name="mobileMail">
+			 <a class="nav-link" onclick="logout()">Kijelentkezés</a>
+			</li>
+	</ul>
+        <ul class="navbar-nav ml-auto hide-mobile">
+			  <li class="nav-item dropdown hide-mobile">
+				<a class="nav-link dropdown-toggle" href="#" style="float: right;display:none;"  id="mail" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				</a>
+				<div class="dropdown-menu" aria-labelledby="mail">
+					<span class="dropdown-item"></a>Kifizetett érmek: <span id="medalDesktop"></span></span>
+					<a class="dropdown-item" onclick="myResults()">Eredményeim</a>
+					<a class="dropdown-item" onclick="openSettings()">Adat módosítás</a>
+					<a class="dropdown-item" onclick="logout()">Kijelentkezés</a>
+				</div>
+			  </li> 
+        </ul>
+    </div>
+</nav>
+<!-- 
+<div class="alert alert-danger" role="alert">
+	Figyelem! 2021.01.15. (péntek) és 16. (szombat) napokon a Szombathelyi Erdészeti Zrt. állományszabályzó nagyvad vadászatokat tart a Köszegi-hegységben. Kérlek ne indulj útnak ezen a napon!
+</div>
+-->
+<div class="slideshow-container">
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+  <!-- Full-width images with number and caption text -->
+  <div class="mySlides fade">
+    <img src="pic/img1.jpeg" style="width:100%">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="pic/img2.jpeg" style="width:100%">
+  </div>
+
+  <div class="mySlides fade">
+    <img src="pic/img3.jpeg" style="width:100%">
+  </div>
+  
+    <div class="mySlides fade">
+    <img src="pic/img4.jpeg" style="width:100%">
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+  <span class="dot" onclick="currentSlide(4)"></span> 
+</div>
+<div class="home" id="home">
+<div style="float:left;text-align: center;background: #D3D3D3; margin: 2px; padding-top: 10px;" class="intro"><i class="fas fa-hiking fa-10x"></i><br>Túrázz! Fuss!<br>Ha szintidőn belül érsz célba egyedi díjazásban részesülsz.</div>
+<div style="float: left;text-align: center;background: #D3D3D3; margin: 2px; padding-top: 10px;" class="intro"><i class="fas fa-mobile-alt fa-10x"></i><br>Igazold!<br>Az ellenőrző pontok felkeresését a mobiloddal tudod hitelesíteni.</div>
+<div style="float: left;text-align: center;background: #D3D3D3; margin: 2px; padding-top: 10px;" class="intro"><i class="fas fa-award fa-10x"></i><br>Teljesítsd!<br>Indulj el a hét bármelyik napján, amikor az időd engedi.</div>
+</div>
+
+<iframe class="alltrails" src="https://www.alltrails.com/widget/map/mini-573f7f2?u=m" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="AllTrails: Trail Guides and Maps for Hiking, Camping, and Running"></iframe>
+<div class="home" id="itiner">
+<div style="width:33%;float:left;text-align: center;font-size: 1.2em;"><i class="fas fa-arrows-alt-h">Táv: 14,34 km</i></div>
+<div style="width:33%;float:left;text-align: center;font-size: 1.2em;"><i class="fas fa-arrows-alt-v">Emelkedés: 656 m</i></div>
+<div style="width:33%;float:left;text-align: center;font-size: 1.2em;"><i class="fas fa-stopwatch">Szintidő: 6 óra</i></div>
+
+<div style="float: left;text-align: center; margin-top: 10px;" class="intro"><i class="fa fa-qrcode fa-10x"></i><br>QR kódok helyei<br><a href="docs/qrcode.pdf">Letöltés</a></div>
+<div style="float: left;text-align: center; margin-top: 10px;" class="intro"><i class="far fa-file-image fa-10x"></i><br>Táblázatos itiner<br><a href="docs/tablazat.pdf">Letöltés</a></div>
+<div style="float: left;text-align: center; margin-top: 10px;" class="intro"><i class="fas fa-globe-europe fa-10x"></i><br>GPX térkép<br><a href="docs/map.gpx">Letöltés</a></div>
+
+</div>
+<div class="home hide-mobile" id="landmarks">
+<div class="kepDiv"><img src="pic/1.jpg" style='width: 100%; object-fit: contain'></div>
+<div style="width:80%;float: left;text-align: justify;">
+A copfstílusú szószék, a Fájdalmas Szűzanya mellékoltár és felette a Szent Vid szobor igazán lenyűgöző.Tornya háromszintes, legrégebbi képét 1700-ban adományozták a templomnak, Mária mennybe menetelét jeleníti meg.
+A Szent Vid-hegy Közép-Európa egyik legismertebb régészeti lelőhelye. A templom melletti gerincen találunk információs táblákat az ásatásokról.
+Nem messze a kápolnától indult évtizedeken át a legendás Országos Kék Túra a Zempléni-hegység felé. Emlékoszlop emlékeztet a hajdani kiindulópontra. A határok átjárhatóságával a kék túra kezdőpontját a Dunántúl legmagasabb pontjára, az Írottkőre tették, ma már a Szent Vid-kápolnát nem is érinti az útvonal.</div>
+</div>
+<div class="home hide-mobile">
+<div style="width:80%;float: left;text-align: justify;">
+Bozsok község mellett találjuk a Kalapos-köveket a Kőszegi-hegység legvadregényesebb részén. A zöldpala kőzet felszínen lévő sziklaalakzatai érdekes formákkal örvendeztetik meg az arra járó turistát.
+A Kőszegi-hegységben zöldpalát csak Bozsok környékén találunk. Kialakulása a földtörténeti középkorba (jura, kréta) tehető, amikor ezen a területen egy születő óceánhoz köthető vulkáni tevékenység folyt,
+ melynek során az óceáni kérget létrehozó vulkáni kőzetek képződtek. A későbbi metamorfózis (a nyomás- és hőmérsékletváltozás átalakító ereje) ezeket a kőzeteket alakította át zöldpalává. A folyamat az Alpok felgyűrődéséhez köthető.
+ </div>
+ <div class="kepDiv"><img src="pic/2.jpg" style='width: 100%; object-fit: contain'></div>
+ </div>
+ <div class="home hide-mobile">
+  <div class="kepDiv"><img src="pic/3.jpg" style='width: 100%; object-fit: contain'></div>
+  <div style="width:80%;float: left;text-align: justify;">
+  Az Írott-kő (882m) nem csak a Kőszegi-hegység legmagasabb pontja, hanem a Dunántúl, illetve Burgenland csúcspontja is.
+ Németül is így hívják: Geschriebenstein, azaz „Megírt kő”. A hegytetőn 1913-ban épült kilátó egyszerre két ország területén fekszik, mind Magyarország, mind Ausztria irányából látogatható. A kilátótól mintegy 40 méterre, osztrák
+  területen található a hegynek is nevet adó sziklaalakzat, amelyen ma is kivehetők a bevésett C B E betűk, amelyek talán Batthyány és az Esterházy birtokok határvonalát jelölhették (Confinia Batthyányana Esterhazyana). 
+</div>
+</div>
+<div class="home hide-desktop" id="test" >
+	<button type="button" class="btn btn-danger" onclick="GPSTest()" style="width: 100%;">Telefon beállítás ellenőrzés</button>
+</div>
+ <div class="home" id="news">
+ <p class="news"><a class="link" data-toggle="collapse" href="#altalanosTudnivalo" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Általános tudnivalók</a></p>
+ <div class="collapse" id="altalanosTudnivalo">
+  <div class="card card-body">
+Az Írott kör egy bármikor teljesíthető, önellátó, instant gyalogos túra és terepfutó verseny a Kőszegi-hegységben. Sajátossága, hogy a túrát bármilyen irányba haladva, bármelyik ellenőrző pontról indulva lehet teljesíteni. A résztvevő a túrán felmerülő problémákat, nehézségeket, fizikai vagy mentális kihívásokat egyedül kell leküzdje, a teljesítés folyamán a szervezőktől bármikor kérhet verbális segítséget (útba igazítás, stb.), azonban személyesen a szervezők részéről senki nem felügyeli a túrát. Mindenki saját felelősségére indul.
+  </div>
+</div>
+ <p class="news"><a class="link" data-toggle="collapse" href="#korhatar" role="button" aria-expanded="false" aria-controls="collapseExample">
+ Korhatár</a></p>
+  <div class="collapse" id="korhatar">
+  <div class="card card-body">
+A túrán minden 18. évét betöltött személy indulhat - saját felelősségére. Ha még nem múltál el 18 éves, csak hivatalosan teljesítő nagykorú kíséretében indulhatsz.
+ </div>
+  </div>
+ <p class="news"><a class="link" data-toggle="collapse" href="#turaFelszereles" role="button" aria-expanded="false" aria-controls="collapseExample">Túra felszerelés
+ </a></p>
+  <div class="collapse" id="turaFelszereles">
+  <div class="card card-body">
+Pár tanács, mit érdemes a túrára magaddal vinni:<br>
+<ul>
+<li>Okostelefon mobilinternet előfizetéssel </li>
+<li>Power bank </li>
+<li>Étel és ital </li>
+<li>Fényképes igazolvány - egyes szakaszok közvetlen az országhatáron húzódik </li>
+<li>Időjárásnak megfelelő öltözet (esőkabát, bakancs/sportcipő, stb.)</li>
+<li>Készpénz </li>
+<li>Éjszakai teljesítés esetén lámpa </li>
+<li>Nyomtatott térkép vagy digitális térkép</li>
+</ul>
+  </div>
+ </div>
+ <p class="news"><a class="link" data-toggle="collapse" href="#megkozelithetoseg" role="button" aria-expanded="false" aria-controls="collapseExample">Megközelíthetőség</a></p>
+  <div class="collapse" id="megkozelithetoseg">
+  <div class="card card-body">
+ A túrát bármilyen irányba haladva, bármelyik ellenőrző pontról indulva lehet teljesíteni. Megközelíthetőség szempontjából az alábbi pontokat ajánljuk kezdőpontnak:
+<br><br>
+<b>Velem</b>
+Tömegközlekedéssel: Szombathelyről közvetlen járattal nem elérhető, egy átszállással már elérhető. A menetidő 1 óra, hétköznaponként 1-2 óránként járnak járatok, hétvégén 2-3 óránként számíthatunk járatokra.<br>
+Autóval: Parkolni érdemes a falu elején található Novák falva és a falu temetője közti parkolóban.<br>
+<br>
+<b>Írott-kő kilátó</b>
+Autóval megközelíthető Ausztria irányából. Az osztrák oldalon Rohoncot (Rechnitz) észak felé elhagyva, a ponttól kb 1km-re található parkolóban hagyhatjuk az autónk, majd gyalogosan érhető el a pont.  </div>
+ </div>
+ <p class="news"><a class="link" data-toggle="collapse" href="#ellenorzopontok" role="button" aria-expanded="false" aria-controls="collapseExample">Ellenőrző pontok</a></p>
+  <div class="collapse" id="ellenorzopontok">
+  <div class="card card-body">
+  	A túra során 4 ellenőrző pontot kell felkeresni, minden esetben 500 méteres körben lehetséges az ellenőrző pont érintése. Az ellenőrző pontok:<br>
+	<ul>
+		<li>Velem - Harangláb melletti információs tábla</li>
+		<li>Kalapos-kő -  A kalapos kő környéke</li>
+		<li>Írott-kő -  Írott-kő pihenő információs táblája</li>
+		<li>Szent Vid - A kápolna környéke</li>
+	</ul>
+  </div>
+</div>
+ <p class="news"><a class="link" data-toggle="collapse" href="#teljesites" role="button" aria-expanded="false" aria-controls="collapseExample">Teljesítéssel kapcsolatos tudnivalók</a></p>
+  <div class="collapse" id="teljesites">
+  <div class="card card-body">
+Az ellenőrző pontok 500 méteres körzetében a mobil telefon GPS adatai alapján történik az ellenőrző pontok érintése.  A teljesítésre 6 óra áll rendelkezésre. A túra teljesíthető túrázva vagy futva.<br><br>
+
+A túra nevezési díja 1000 (kitűző)/3500 (érem) forint. Ezt az összeget csak sikeres teljesítés eseten kell kifizetni.  Ezt a díjat a sikeres teljesítést követően banki utalással vagy Revoluttal  14 napon belül kell eljuttatni a szervezők részére. Ezt meghaladóan a rendszer automatikusan törli az adott teljesítést es nem jelenik meg többet az eredmények között. 
+A teljesítő postai úton kapja meg a díjazást vagy velemből indulás esetén személyesen átvehető.
+
+<br>
+<br>
+A nevezési díj magába foglalja:
+<ul>
+	<li>Egyedi kitűző/bronz érem</li>
+	<li>Eredmény megjelenítése a weboldalon</li>
+	<li>Postaköltség - egyszerű postai levélként (plusz költségért lehetőség van ajánlott vagy elsőbbségi levélre is)</li>
+	<li>Túra közbeni telefonos segítségnyújtás</li>
+</ul>
+<!--
+Jelenlegi kitűző képe:
+<img src="kituzo.jpg" width="250">
+-->
+</div>
+</div>
+<!--<p class="news"><a class="link" data-toggle="collapse" href="#erem" role="button" aria-expanded="false" aria-controls="collapseExample">Érem előrendelés</a></p>
+<div class="collapse" id="erem">
+<div class="card card-body">
+2021. május 15-ig kedvezményesen 3000 forintért megrendelheted az érmet. Az email címed alatt láthatod jelenleg hány kifizetett érmed van. 
+A megrendelés 2021. december 31-ig beváltható. Ha a túrát május 15 előtt teljesíted, akkor az érmek megérkezésekor postázzuk neked (május körül). 
+Ha a túrát az érmek megérkezése után teljesíted, akkor személyes átvételre van lehetőséged Velemben vagy postázunk.<br><br>
+
+Revoluton (+36703615873) vagy utalással (12094507-00634549-00100004) tudsz előrendelni, közleményben tüntesd fel az email címed.
+</div>
+</div>-->
+ <br>
+ </div>
+ <div class="home" id="onways">
+	 <p>Jelenleg teljesítők:</p>
+	 <table class="table" id="onwayFullTable">
+		  <thead>
+			<tr>
+			  <th scope="col" style="vertical-align: baseline;">Név</th>
+			  <th scope="col" style="vertical-align: baseline;">Indulási Idő</th>
+			  <th scope="col" style="vertical-align: baseline;" class="hide-mobile">Teljesített ellenőrző pont</th>
+			  <th scope="col" style="vertical-align: baseline;">Következő ellenőrző pont</th>
+			</tr>
+		  </thead>
+		  <tbody id="onwayTable">
+		  </tbody>
+		</table>
+		<span id="onwayEmpty" style="display:none">Jelenleg senki nincs úton.</span>
+ <br>
+ </div>
+  <div class="home" id="records">
+	 <p><a data-toggle="modal" href="" onclick="sectionRecords('mini', '')" style="color:black">Rekordok:</a></p>
+	 	 <table class="table">
+			<tr>
+			  <th scope="col">Leggyorsabb női teljesítő:</th>
+			  <td id="recordWomanName"></td>
+			  <td id="recordWomanTime"></td>
+			</tr>
+			<tr>
+			  <th scope="col">Leggyorsabb férfi teljesítő:</th>
+			  <td id="recordManName"></td>
+			  <td id="recordManTime"></td>
+			</tr>
+			<tr>
+				<th scope="col">Legtöbb női teljesítés:</th>
+				<td id="recordMostWomanName"></td>
+				<td id="recordMostWomanTime"></td>
+			</tr>
+			<tr>
+				<th scope="col">Legtöbb férfi teljesítés:</th>
+				<td id="recordMostManName"></td>
+				<td id="recordMostManTime"></td>
+			</tr>
+			<tr>
+			  <th scope="col">Legtöbb teljesítés egy napon:</th>
+			  <td id="recordMostRaceADayName"></td>
+			  <td id="recordMostRaceADayCount"></td>
+			</tr>
+			<tr>
+			  <th scope="col">Leggyorsabb férfi kétszeres teljesítés egy napon:</th>
+			  <td id="recordMostRaceADaySumTimeUserName"></td>
+			  <td id="recordMostRaceADaySumTime"></td>
+			</tr>
+		</table>
+ <br>
+ </div>
+ <div class="home" id="partners">
+	 <p>Partnereink:</p>
+	<a href="https://itrail.hu/" target="_blank"><img src="https://itrail.hu/img/logo-256.5188992c.png"></a>
+	<a href="https://www.geocaching.hu/documents.geo?htmldoc=egyesuleti_tagsag"><img src="https://www.geocaching.hu/files/logo/geocaching_logo_transparent.png" style="width: 256px; height: 256px;"></a>
+	<a href="https://irottkor.hu/" target="_blank"><img src="https://irottkor.hu/pic/logo.svg"></a>
+ </div>
+       <!-- forgottpassword -->
+      <!-- The Modal -->
+   <div class="modal" id="forgottPass">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Jelszó Igénylés</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			<div class="form-group">
+					<label for="InputForgotEmailNew" style="padding: 0px;">E-mail:</label>
+					<input type="text" class="form-control" id="InputForgotEmailNew" disabled>
+			</div>
+			<div class="form-group" style="margin-bottom: 0px;">
+				<label for="passwordNewInput">Jelszó</label>
+				<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<input type="password" class="form-control col-6" id="passwordNewInput" name="passwordNewInput" placeholder="Jelszó">
+					<input type="password" class="form-control col-6" id="passwordNewInput2" name="passwordNewInput2" placeholder="Jelszó újra">
+					<small id="passwordHelpBlock" class="form-text text-muted">A megadott jelszónak legalább 8 karakter hosszúnak kell lenni.</small>
+				</div>
+			</div>
+			<p id="successfullForgottNewMail" style="color: green; display:none;">Az új jelszó beállításra került!</p>
+        </div>
+		
+        <div class="modal-footer">
+			<button type="button" class="btn btn-dark" onclick="forgotMailSend()">Küldés</button>
+		</div>
+        
+      </div>
+    </div>
+  </div>
+   <!-- The Modal -->
+     <div class="modal" id="start">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Indulás</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			A rajt gombra kattintva érheted el az indító felületet.<br> Pár emlékeztető:
+			<li>Bármely ellenőrző pont közelében elkezdheted a túrát.</li>
+			<li>Bármilyen irányba haladva teljesítheted.</li>
+			<li>6 órád van körbe érni.</li>
+			<li>Feladni bármikor feltudod a Feladás gomb megnyomásával.</li>
+			<li>Csak sikeres teljesítés esetén kell a nevezési díjat kifizetni.</li>
+			<li>Útba igazításhoz hívd a +36/70 361 5873 számot, segítség esetén hívd a 112-t.</li>
+			<li>Csak saját felelőségre vágj bele!</li>
+        </div>
+        <div class="modal-footer">
+			<button type="button" class="btn btn-dark .d-none .d-sm-block" onclick="gpxUpload()">GPX File feltöltése</button>
+			<button type="button" class="btn btn-danger" onclick="run()">Rajt</button>
+		</div>
+      </div>
+    </div>
+  </div>
+      <!-- results -->
+      <!-- The Modal -->
+     <div class="modal" id="myresults">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Eredményeim</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			<table class="table">
+			  <thead>
+				<tr>
+				  <th scope="col">#</th>
+				  <th scope="col">Indulás</th>
+				  <th scope="col">Idő</th>
+				  <th scope="col" class="hide-mobile'"></th>
+				  <th scope="col"></th>
+				</tr>
+			  </thead>
+			  <tbody id="myresultsTable">
+			  </tbody>
+			</table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+      <!-- settings -->
+      <!-- The Modal -->
+     <div class="modal" id="settings">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Adat Módosítás</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+			  <li class="nav-item">
+				<a class="nav-link active settings" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="true">Jelszó</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link settings" id="phone-tab" data-toggle="tab" href="#phone" role="tab" aria-controls="phone" aria-selected="false">Telefonszám</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link settings" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">Levelezési cím</a>
+			  </li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+			  <div class="tab-pane fade show active" id="password" role="tabpanel" aria-labelledby="home-tab">
+			  <form>
+				  <div class="form-group">
+					<label for="InputCurrentPassword">Jelenlegi Jelszó:</label>
+					<input type="password" class="form-control" id="InputCurrentPassword" placeholder="Jelenlegi Jelszó">
+					<label for="InputNewPassword">Új Jelszó:</label>
+					<div class="row" style="margin-left: 0px;margin-right: 0px;">
+						<input type="password" class="form-control col-6" id="InputNewPassword" aria-describedby="newPasswordHelp" placeholder="Új Jelszó">
+						<input type="password" class="form-control col-6" id="InputNewPassword2" aria-describedby="newPasswordHelp" placeholder="Új Jelszó újra">
+						<small id="newPasswordHelp" class="form-text text-muted">A megadott jelszónak legalább 8 karakter hosszúnak kell lenni.</small>
+					</div>
+				  </div>
+			  </form>
+			  <p id="successfullNewMail" style="color: green; display:none;">Az új jelszó beállításra került!</p>
+			  </div>
+			  <div class="tab-pane fade" id="phone" role="tabpanel" aria-labelledby="profile-tab">
+			  <form>
+				  <div class="form-group">
+					<label for="InputCurrentPhone">Telefonszám módosítása:</label>
+					<input type="text" class="form-control" id="InputCurrentPhone" aria-describedby="currentPhoneHelp" placeholder="Telefonszám">
+					<small id="currentPhoneHelp" class="form-text text-muted">Fontos, hogy olyan telefonszámot adj meg, amin elérhető vagy a túra közben.</small>
+				  </div>
+			  </form>
+			   <p id="successfullNewPhone" style="color: green; display:none;">Az új telefonszám beállításra került!</p>
+			  </div>
+			  <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+			  <small id="currentPhoneHelp" class="form-text text-muted text-justify">Az érmet postai úton juttatjuk el hozzád, ha nem találkozunk a célban. Kérlek pontos címet adj meg, hogy megérkezzen a díjazás hozzád.</small>
+			  <form>
+				  <div class="form-group">
+				  	<div class="row" style="margin-left: 0px;margin-right: 0px;">
+						<label for="InputPostalCode" class="col-3" style="padding: 0px;">Irányítószám:</label>
+						<label for="InputCity" class="col-9" style="padding: 0px;">Település:</label>
+					</div>
+					<div class="row" style="margin-left: 0px;margin-right: 0px;">
+						<input type="text" class="form-control col-3" id="InputPostalCode" placeholder="Irányítószám">
+						<input type="text" class="form-control col-9" id="InputCity" placeholder="Település">
+					</div>
+					<label for="InputAddress" style="padding: 0px;">Cím:</label>
+					<input type="text" class="form-control" id="InputAddress" placeholder="Cím">
+				  </div>
+			  </form>
+			  <p id="successfullNewAddress" style="color: green; display:none;">Az új cím beállításra került!</p>
+			  </div>
+			</div>
+        </div>
+        <div class="modal-footer">
+			<button type="button" class="btn btn-dark" onclick="changeData()">Küldés</button>
+		</div>
+      </div>
+    </div>
+  </div>
+    <!-- mail -->
+      <!-- The Modal -->
+     <div class="modal" id="forgotmail">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Elfelejtett Jelszó</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			<div class="form-group">
+					<label for="InputForgotEmail" style="padding: 0px;">E-mail:</label>
+					<input type="text" class="form-control" id="InputForgotEmail" placeholder="E-mail cím">
+					<small id="forgotEmailHelp" class="form-text text-muted">A regisztrációkor megadott e-mail címedre küldjük a jelszó cseréhez szükséges linket.</small>
+			</div>
+			<p id="successfullForgottMail" style="color: green; display:none;">A jelszó emlékeztető e-mailt elküldtünk a megadott címre!</p>
+        </div>
+		
+        <div class="modal-footer">
+			<button type="button" class="btn btn-dark" onclick="forgotMail()">Küldés</button>
+		</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- EREDMENYEK -->
+      <!-- The Modal -->
+     <div class="modal" id="results">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Eredmények</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			<table class="table">
+			  <thead>
+				<tr>
+				  <th scope="col">#</th>
+				  <th scope="col">Név</th>
+				  <th scope="col" class="hide-mobile">Indulás</th>
+				  <th scope="col">Idő</th>
+				  <th scope="col"></th>
+				</tr>
+			  </thead>
+			  <tbody id="resultsTable">
+			  </tbody>
+			</table>
+        </div>
+		
+        <div class="modal-footer">
+			  <ul class="pagination" style="margin-bottom: 0px;" id="resultPagination">
+				<li class="page-item">
+				  <a class="page-link" href="#" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				</li>
+				{{PAGES}}
+				<li class="page-item">
+				  <a class="page-link" href="#" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+					<span class="sr-only">Next</span>
+				  </a>
+				</li>
+			  </ul>
+		</div>
+      </div>
+    </div>
+  </div>
+  
+    <!-- REKORDOK -->
+      <!-- The Modal -->
+    <div class="modal" id="sectionRecords">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Rekordok</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" id="rekordTabs" role="tablist">
+					<li class="nav-item"><a class="nav-link active settings" href="#vegyes" id="vegyes-tab" data-toggle="tab" role="tab">Vegyes</a></li>
+					<li class="nav-item"><a class="nav-link settings" href="#female" id="female-tab" data-toggle="tab" role="tab">Női</a></li>
+					<li class="nav-item"><a class="nav-link settings" href="#male" id="male-tab" data-toggle="tab" role="tab">Férfi</a></li>
+				</ul>
+				
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="vegyes">
+						<table class="table">
+							<thead>
+								<tr>
+								  <th scope="col">Szakasz</th>
+								  <th scope="col">Név</th>
+								  <th scope="col">Idő</th>
+								</tr>
+							</thead>
+							<tbody id="sectionRecordsTable">
+							</tbody>
+						</table>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="female">
+						<table class="table">
+							<thead>
+								<tr>
+								  <th scope="col">Szakasz</th>
+								  <th scope="col">Név</th>
+								  <th scope="col">Idő</th>
+								</tr>
+							</thead>
+							<tbody id="sectionRecordsTableFemale">
+							</tbody>
+						</table>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="male">
+						<table class="table">
+							<thead>
+								<tr>
+								  <th scope="col">Szakasz</th>
+								  <th scope="col">Név</th>
+								  <th scope="col">Idő</th>
+								</tr>
+							</thead>
+							<tbody id="sectionRecordsTableMale">
+							</tbody>
+						</table>
+					</div>
+				</div>		
+
+      </div>
+    </div>
+  </div>
+  </div>
+  
+
+     <!-- ellenorzopont -->
+      <!-- The Modal -->
+     <div class="modal" id="checkpoints">
+    <div class="modal-dialog modal-full">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Ellenőrző pontok<span id="inProgressLabel" style="color: green; display:none;"> Elrajtoltál, teljesítés folyamatban!</span></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+		<span id="nextCheckpointLabel">Következő Ellenőrző pont: <span id="nextCheckpointName"></span></span>
+		<span id="startTimeLabel">Indulás ideje: <span id="startTimeName"></span></span>
+		<br>
+		
+		<table class="table">
+		  <thead>
+			<tr>
+			  <th scope="col" class="raceTable" style="vertical-align: baseline;">Ellenőrző Pont</th>
+			  <th scope="col" class="raceTable" style="vertical-align: baseline;">Távolság</th>
+			  <th scope="col" class="raceTable" style="vertical-align: baseline;">Idő</th>
+			  <th scope="col" class="raceTable" style="vertical-align: baseline;">Sebesség (km/h)</th>
+			</tr>
+		  </thead>
+		  <tbody id="checkpointTable">
+		  </tbody>
+		  <tfoot>
+			<tr>
+			  <th scope="row" class="raceTable">Összesen</th>
+			  <td scope="row" class="raceTable">14,34 km</td>
+			  <td id="totalTime" class="raceTable"></td>
+			  <td id="totalPace" class="raceTable"></td>
+			</tr>
+		  </tfoot>
+		</table>
+		
+		<p id="away" style="display: none; color: red;">Nem vagy ellenőrző ponton! Ha azon vagy kérlek probáld újra 2-3 alkalommal, ha akkor se müködik kattints a "Probléma esetén kattints ide" gombra!</p>
+		<p id="visited" style="display: none; color: green;">Sikeres pont érintés!</p>
+		<p id="pay" style="display: none; color:red;">Gratulálunk, sikeres teljesítés!<br> Ahhoz, hogy hivatalossá is váljon, kérlek utalj 1000 (kitűző)/3500 (érem) forintot a következő számla számra: 12094507-00634549-00100004, lehetőséged van Revoluttal is fizetni a +36703615873 számra küldve. Mindkét esetben a megjegyzésben add meg az email címedet (akár többet is egyben).</p>
+		<div id="kerdes1" class="alert alert-dark" role="alert">QR kód Azonosító: <span style="font-weight: bold;" id="QRCodeID"></span></div>
+		<button type="button" class="btn btn-success .d-none .d-sm-block" onclick="checkIn()" id="checkInButton" style="width: 100%">Ellenőrző pontra érkeztem</button>    
+		<hr id="problemCheckInButtonHR" style="display: none;" />
+		<p id="problemCheckInButtonP" style="display: none;"></p>
+		<button type="button" class="btn btn-warning .d-none .d-sm-block" onclick="checkInWithoutGPSCheck()" id="problemCheckInButton" style="width: 100%; display: none;">Probléma esetén kattints ide</button> 
+	   </div>
+        <div class="modal-footer">
+			   	<button type="button" class="btn btn-danger mr-auto" onclick="giveUp()" id="giveUpButton" style="width: 100%">Feladás</button>
+		</div>
+      </div>
+    </div>
+  </div>
+   
+  <div class="modal" id="login">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Indulás</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			<form id="loginForm">
+			  <div class="form-group">
+				<label for="LoginEmail">Email</label>
+				<input type="email" class="form-control" id="LoginEmail" name="LoginEmail" aria-describedby="emailHelp" placeholder="Email cím">
+			  </div>
+			  <div class="form-group">
+				<label for="LoginPassword">Jelszó</label>
+				<input type="password" class="form-control" id="LoginPassword" name="LoginPassword" placeholder="Jelszó">
+			  </div>
+			  <p id="successfullRegistration" style="color: green; display:none;">Sikeres regisztráció, kérlek lépj be!</p>
+			  <p id="incorrectPassword" style="color: red; display:none;">Hibás e-mail vagy jelszó!</p>
+			  Nincs még fiókom, regisztrálok <a data-dismiss="modal" data-toggle="modal" href="#registration">itt</a>.<br>
+			  Elfelejtettem a jelszavam, emlékeztető e-mailt kérek <a data-dismiss="modal" data-toggle="modal" href="#forgotmail">itt</a>.<br>
+			  <button type="button" class="btn btn-dark" onclick="login()"">Belépés</button>
+			</form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="registration">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Regisztráció</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			<form id="register">
+			   <div class="form-group" style="margin-bottom: 0px;">
+				<label for="nameInput" style="margin-bottom: 0px;">Név</label>
+				<input type="text" class="form-control" id="nameInput" name="nameInput" aria-describedby="emailHelp" placeholder="Család név Kereszt név">
+			  </div>
+			  <div class="form-group" style="margin-bottom: 0px;">
+				<label for="emailInput" style="margin-bottom: 0px;">Email</label>
+				<input type="email" class="form-control" id="emailInput" name="emailInput" aria-describedby="emailHelp" placeholder="Email cím">
+			  </div>
+			  <div class="form-group" style="margin-bottom: 0px;">
+				<label for="passwordInput" style="margin-bottom: 0px;">Jelszó</label>
+				<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<input type="password" class="form-control col-6" id="passwordInput" name="passwordInput" placeholder="Jelszó">
+					<input type="password" class="form-control col-6" id="passwordInput2" name="passwordInput2" placeholder="Jelszó újra">
+					<small id="passwordHelpBlock" class="form-text text-muted">A megadott jelszónak legalább 8 karakter hosszúnak kell lenni.</small>
+				</div>
+			  </div>
+			  <div class="form-group" style="margin-bottom: 0px;">
+				<label for="PhoneInput" style="margin-bottom: 0px;">Telefonszám (Túra közben hívható)</label>
+				<input type="text" class="form-control" id="PhoneInput" name="PhoneInput" placeholder="Telefonszám">
+			  </div>
+			  <div class="form-group" style="margin-bottom: 0px;">
+			  	<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<label for="CityInput" class="col-9" style="padding-left: 0px; margin-bottom: 0px;">Település</label>
+					<label for="ZipCodeInput" class="col-3" style="padding-left: 0px; margin-bottom: 0px;">Irányítószám</label>
+				</div>
+				<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<input type="text" class="form-control col-9" id="CityInput" placeholder="Település" name="CityInput">
+					<input type="text" class="form-control col-3" id="ZipCodeInput" placeholder="Irányítószám" name="ZipCodeInput">
+				</div>
+			  </div>
+			    <div class="form-group" style="margin-bottom: 0px;">
+			  	<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<label for="CityInput" class="col-9" style="padding-left: 0px; margin-bottom: 0px;">Utca, házszám</label>
+					<label for="StreetInput" class="col-3" style="padding-left: 0px; margin-bottom: 0px;">Nem</label>
+				</div>
+				<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<input type="text" class="form-control col-9" id="StreetInput" placeholder="Utca, házszám" name="StreetInput">
+					<Select class="form-control col-3" id="GenderInput" name="GenderInput">
+						<option>Nő</option>
+						<option>Férfi</option>
+					</select>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="BirthYearInput" style="margin-bottom: 0px;">Születési dátum</label>
+				<div class="row" style="margin-left: 0px;margin-right: 0px;">
+					<input type="number" class="form-control col-4" id="BirthYearInput"name="BirthYearInput" placeholder="Év">
+					<input type="text" class="form-control col-4" id="BirthMonthInput" name="BirthMonthInput" placeholder="Hónap">
+					<input type="number" class="form-control col-4" id="BirthDayInput" name="BirthDayInput" placeholder="Nap">
+				</div>
+			  </div>
+			  <p id="incorrectMail" style="color: red; display:none;">Megadott e-mail cím már regisztrálva van az oldalon!</p>
+			  <button type="button" class="btn btn-dark" onclick="register()">Regisztráció</button>
+			</form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="modal" id="trackUpload">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Igazolás feltöltése</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+			A Feltöltés gombra kattinva feltöltheted a teljesítésed igazoló gps fájlt.<br> Pár emlékeztető:
+			<li>Azonos ponton kell végződni, mint ahol kezdted.</li>
+			<li>Bármilyen irányba haladva teljesítheted.</li>
+			<li>1 fájl csak 1 kör adatait tartalmazhatja.</li>
+			<li>Kitérőket tartalmazhat, de minden ellenőrző ponton át kell haladni.</li>
+			<li style="color: red;">Sikertelen feltöltés esetében küld az infot@irottkor.hu e-mail címre.</li>
+			<div class="custom-file">
+				<input type="file" class="custom-file-input" id="trackFile" required>
+				<label class="custom-file-label" for="validatedCustomFile" id="file-name">Fájl kiválasztása...</label>
+			</div>
+			<div style="color: red;" id="file-upload-error"></div>
+        </div>
+        <div class="modal-footer">
+			<div class="spinner-border text-danger" role="status" id="upload-spinner" style="visibility: hidden;">
+				<span class="sr-only">Loading...</span>
+			  </div>
+			<button type="button" class="btn btn-danger" onclick="sendGPXUploadRequest()" id="upload-button">Feltöltés</button>
+		</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="pickupPointModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+	    <div class="modal-header">
+          <h4 class="modal-title">Átvételi Pont</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+		<div class="modal-body">
+			<p>Velemi rejtekhely:</p>
+			<ul>
+			<li>Velem központjából, ahol az ellenörző pont is van, haladj a Dózsa György utca 29-ig</li>
+			<li>Az itt található hármas elágazásnál fordulj balra.</li>
+			<li>Présházak illetve pincék romjait találod itt, haladj egészen az első ép pincéig, ami így néz ki: <br><img src="pic/preshazTavol.jpg" style="max-width: 250px"></li>
+			<li>Az pince ajtajától jobbra található ablakot nyisd ki a szög elforgatásával (kicsit nagyobb erővel). Ezt keresd: <br><img src="pic/preshazKozel.jpg" style="max-width: 250px"></li>
+			<li>Az ablakban található műanyag dobozból vegyél ki egy kitűzőt/érmet és kérlek zárd vissza az ablakot.</li>
+			</ul>
+		</div>
+	  </div>
+    </div>
+</div>  
+  
+<script src="slideshow.js"></script>
+</body>
+</html>
